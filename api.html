@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Instagram Posts</title>
+  </head>
+  <body>
+    <h1>Instagram Posts</h1>
+    <div id="posts"></div>
+    <script>
+      fetch('/ig/v1/?username=iameggiii')
+        .then(response => response.json())
+        .then(data => {
+          const postsDiv = document.getElementById('posts');
+          data.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.innerHTML = `
+              <h2>${post.Caption}</h2>
+              <img src="${post.ImageURL}">
+            `;
+            postsDiv.appendChild(postElement);
+          });
+        })
+        .catch(error => console.error(error));
+    </script>
+  </body>
+</html>
